@@ -40,9 +40,13 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        enemy.Update(deltaTime);
-        player.Update(enemy, deltaTime);
+
+        sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
+
+
         frameRate.Update(deltaTime);
+        enemy.Update(deltaTime);
+        player.Update(enemy, deltaTime, mousePosition);
         //-------------------------------- Update --------------------------------
 
         //-------------------------------- Draw --------------------------------

@@ -11,7 +11,6 @@ void Player::Initialize(int hp, int mana, int level)
 
     playerSprite.scale(sf::Vector2f(1, 1));
     speed = 0.5f;
-    bulletSpeed = 0.1f;
     fireRate = 100.0f;
     fireRateTimer = 0.0f;
     damage = 10;
@@ -38,7 +37,7 @@ void Player::Load()
     }
 };
 
-void Player::Update(Enemy &enemy, float deltaTime)
+void Player::Update(Enemy &enemy, float deltaTime, sf::Vector2f& mousePosition)
 {
     sf::Vector2f position = playerSprite.getPosition();
 
@@ -70,19 +69,18 @@ void Player::Update(Enemy &enemy, float deltaTime)
         fireRateTimer += deltaTime;
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= fireRate){
             fireRateTimer = 0.0f;
-            bullets.push_back(sf::RectangleShape(sf::Vector2f(10, 10)));
-            bullets[bullets.size()-1].setPosition(playerSprite.getPosition()+temperare);
-            bullets[bullets.size()-1].setFillColor(sf::Color::Red);
+            bullets.push_back(Bullet());
+            bullets[bullets.size()-1].Initialize(playerSprite.getPosition()+temperare, mousePosition, 1.0f);
         }
 
         for(size_t i = 0; i < bullets.size(); i++){
-            bulletDirection = enemy.enemySprite.getPosition() - bullets[i].getPosition()+temperare;
-            bulletDirection = Function::normalizedVector2f(bulletDirection);
-            bullets[i].setPosition(bullets[i].getPosition() + bulletDirection*bulletSpeed*deltaTime);
+            // bullets[i].setPosition(bullets[i].getPosition() + bulletDirection*bulletSpeed*deltaTime);
+
+            bullets[i].Update(deltaTime);
 
             if(enemy.get_health() > 0)
             {
-            if(Function::CheckCollision(bullets[i].getGlobalBounds(), enemy.enemySprite.getGlobalBounds())){
+            if(Function::CheckCollision(bullets[i].GetGlobalBounds(), enemy.enemySprite.getGlobalBounds())){
                 bullets.erase(bullets.begin() + i);
                 std::cout << "Heat, Enemy Health = " << enemy.get_health() - damage*this->get_level() << std::endl;
                 enemy.set_health(- damage*this->get_level());
@@ -98,7 +96,6 @@ void Player::Draw(sf::RenderWindow *window)
 {
     window->draw(playerSprite);
     for (size_t i = 0; i < bullets.size(); i++){
-        window->draw(bullets[i]);
+        bullets[i].Draw(window);
     }
-    window->draw(boundingRectangle);
 };
