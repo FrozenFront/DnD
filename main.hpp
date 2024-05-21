@@ -5,5 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "enemy.hpp"
 #include "player.hpp"
+#include "FrameRate.hpp"
 
 #endif

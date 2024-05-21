@@ -13,15 +13,22 @@ int main()
 
     Enemy enemy;
     enemy.Initialize();
+
+    FrameRate frameRate;
+    frameRate.Initialize();
     //-------------------------------- initialization --------------------------------
+
     player.Load();
     enemy.Load();
+    frameRate.Load();
 
     sf::Clock clock;
 
     //main loop
     while (window.isOpen())
     {
+        sf::Time deltaTimeTimer = clock.restart();
+        float deltaTime = deltaTimeTimer.asMilliseconds();
         //-------------------------------- Update --------------------------------
         sf::Event event;
         while (window.pollEvent(event))
@@ -29,13 +36,9 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
-        sf::Time deltaTimeTimer = clock.restart();
-        float deltaTime = deltaTimeTimer.asMilliseconds();
-
-
         enemy.Update(deltaTime);
         player.Update(enemy, deltaTime);
+        frameRate.Update(deltaTime);
 
         //-------------------------------- Update --------------------------------
 
@@ -43,6 +46,7 @@ int main()
         window.clear(sf::Color::Black);
         player.Draw(&window);
         enemy.Draw(&window);
+        frameRate.Draw(&window);
         window.display();
         //-------------------------------- Draw --------------------------------
 
