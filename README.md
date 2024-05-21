@@ -4,6 +4,6 @@
 Проект готовит Илья Моргулёв и ментор - Александр Смирнов.
 
 Скрипт для запуска в терминале:
-g++ *.cpp -c \n
-g++ *.o -o main -lsfml-graphics -lsfml-window -lsfml-system \n
-./main \n
+# g++ *.cpp -c
+# g++ *.o -o main -lsfml-graphics -lsfml-window -lsfml-system 
+# ./main 
