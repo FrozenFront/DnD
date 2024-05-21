@@ -14,9 +14,8 @@ int main()
     sf::Clock clock;
 
     //-------------------------------- initialization --------------------------------
-
-    player.Initialize();
-    enemy.Initialize();
+    player.Initialize(100, 100, 0);
+    enemy.Initialize(100, 100, 0);
     frameRate.Initialize();
 
     //-------------------------------- initialization --------------------------------
