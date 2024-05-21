@@ -15,7 +15,9 @@ private:
     sf::Vector2f bulletDirection;
     sf::Vector2f temperare = sf::Vector2f(32, 32);
     float bulletSpeed = 0.1f;
-
+    sf::RectangleShape boundingRectangle;
+    sf::Vector2i size;
+    float speed;
 
 public:
     sf::Sprite playerSprite;
@@ -24,7 +26,7 @@ public:
 public:
     void Initialize();
     void Load();
-    void Update(Enemy &enemy);
+    void Update(Enemy &enemy, float deltaTime);
     void Draw(sf::RenderWindow *window);
 };
 

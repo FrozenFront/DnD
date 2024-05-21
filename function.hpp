@@ -8,6 +8,7 @@
 class Function{
     public:
         static sf::Vector2f normalizedVector2f(sf::Vector2f v);
+        static bool CheckCollision(sf::FloatRect rect1, sf::FloatRect rect2);
 };
 
 #endif

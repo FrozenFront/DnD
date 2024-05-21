@@ -3,7 +3,10 @@
 int main()
 {
     //-------------------------------- initialization --------------------------------
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "DnD", sf::Style::Default);
+    window.setFramerateLimit(240);
 
     Player player;
     player.Initialize();
@@ -11,12 +14,10 @@ int main()
     Enemy enemy;
     enemy.Initialize();
     //-------------------------------- initialization --------------------------------
-
-    //-------------------------------- Enemy --------------------------------
     player.Load();
     enemy.Load();
 
-    //-------------------------------- Enemy --------------------------------
+    sf::Clock clock;
 
     //main loop
     while (window.isOpen())
@@ -29,8 +30,12 @@ int main()
                 window.close();
         }
 
-        enemy.Update();
-        player.Update(enemy);
+        sf::Time deltaTimeTimer = clock.restart();
+        float deltaTime = deltaTimeTimer.asMilliseconds();
+
+
+        enemy.Update(deltaTime);
+        player.Update(enemy, deltaTime);
 
         //-------------------------------- Update --------------------------------
 
@@ -40,6 +45,7 @@ int main()
         enemy.Draw(&window);
         window.display();
         //-------------------------------- Draw --------------------------------
+
     }
 
     return 0;
