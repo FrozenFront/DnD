@@ -3,9 +3,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <vector>
-#include <math.h>
-// #include "hero.hpp"
-// #include "enemy.hpp"
+#include "enemy.hpp"
+#include "player.hpp"
 
 #endif
