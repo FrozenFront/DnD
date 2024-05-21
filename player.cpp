@@ -9,6 +9,9 @@ void Player::Initialize()
     size = sf::Vector2i(64, 64);
     playerSprite.scale(sf::Vector2f(1, 1));
     speed = 0.5f;
+    bulletSpeed = 0.1f;
+    fireRate = 100.0f;
+    fireRateTimer = 0.0f;
 
     boundingRectangle.setSize(sf::Vector2f(size.x * playerSprite.getScale().x, size.y * playerSprite.getScale().y));
 };
@@ -57,7 +60,10 @@ void Player::Update(Enemy &enemy, float deltaTime)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             playerSprite.setPosition(position + sf::Vector2f(-1, 1)*speed*deltaTime);
         
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+        //---------------------------------BULLET-----------------------------
+        fireRateTimer += deltaTime;
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= fireRate){
+            fireRateTimer = 0.0f;
             bullets.push_back(sf::RectangleShape(sf::Vector2f(10, 10)));
             bullets[bullets.size()-1].setPosition(playerSprite.getPosition()+temperare);
             bullets[bullets.size()-1].setFillColor(sf::Color::Red);
@@ -68,6 +74,7 @@ void Player::Update(Enemy &enemy, float deltaTime)
             bulletDirection = Function::normalizedVector2f(bulletDirection);
             bullets[i].setPosition(bullets[i].getPosition() + bulletDirection*bulletSpeed*deltaTime);
         }
+        //---------------------------------BULLET-----------------------------
 
         boundingRectangle.setPosition(playerSprite.getPosition());
 

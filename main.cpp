@@ -9,26 +9,31 @@ int main()
     window.setFramerateLimit(240);
 
     Player player;
-    player.Initialize();
-
     Enemy enemy;
-    enemy.Initialize();
-
     FrameRate frameRate;
-    frameRate.Initialize();
+    sf::Clock clock;
+
     //-------------------------------- initialization --------------------------------
 
+    player.Initialize();
+    enemy.Initialize();
+    frameRate.Initialize();
+
+    //-------------------------------- initialization --------------------------------
+
+    //-------------------------------- Load --------------------------------
     player.Load();
     enemy.Load();
     frameRate.Load();
+    //-------------------------------- Load --------------------------------
 
-    sf::Clock clock;
 
     //main loop
     while (window.isOpen())
     {
         sf::Time deltaTimeTimer = clock.restart();
         float deltaTime = deltaTimeTimer.asMilliseconds();
+
         //-------------------------------- Update --------------------------------
         sf::Event event;
         while (window.pollEvent(event))
@@ -39,7 +44,6 @@ int main()
         enemy.Update(deltaTime);
         player.Update(enemy, deltaTime);
         frameRate.Update(deltaTime);
-
         //-------------------------------- Update --------------------------------
 
         //-------------------------------- Draw --------------------------------

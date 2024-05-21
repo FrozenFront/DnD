@@ -21,7 +21,6 @@ void FrameRate::Update(float deltaTime){
     frameRateText.setString("FPS: " + std::to_string(1000.0f/deltaTime) + 
                             "; FrameRate: " + std::to_string(deltaTime));
     timer = 0;
-    std::cout << "wau" << std::endl;
     }
 };
 

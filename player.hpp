@@ -14,10 +14,12 @@ private:
     std::vector<sf::RectangleShape> bullets;
     sf::Vector2f bulletDirection;
     sf::Vector2f temperare = sf::Vector2f(32, 32);
-    float bulletSpeed = 0.1f;
+    float bulletSpeed;
     sf::RectangleShape boundingRectangle;
     sf::Vector2i size;
     float speed;
+    float fireRate;
+    float fireRateTimer;
 
 public:
     sf::Sprite playerSprite;
