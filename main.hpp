@@ -6,5 +6,6 @@
 #include "enemy.hpp"
 #include "player.hpp"
 #include "FrameRate.hpp"
+#include "map.hpp"
 
 #endif

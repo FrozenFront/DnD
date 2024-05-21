@@ -12,18 +12,21 @@ int main()
     Enemy enemy;
     FrameRate frameRate;
     sf::Clock clock;
+    Map map;
+
 
     //-------------------------------- initialization --------------------------------
     player.Initialize(100, 100, 0);
     enemy.Initialize(100, 100, 0);
     frameRate.Initialize();
-
+    map.Initialize();
     //-------------------------------- initialization --------------------------------
 
     //-------------------------------- Load --------------------------------
     player.Load();
     enemy.Load();
     frameRate.Load();
+    map.Load();
     //-------------------------------- Load --------------------------------
 
 
@@ -45,12 +48,14 @@ int main()
 
 
         frameRate.Update(deltaTime);
+        map.Update(deltaTime);
         enemy.Update(deltaTime);
         player.Update(enemy, deltaTime, mousePosition);
         //-------------------------------- Update --------------------------------
 
         //-------------------------------- Draw --------------------------------
         window.clear(sf::Color::Black);
+        map.Draw(&window);
         player.Draw(&window);
         enemy.Draw(&window);
         frameRate.Draw(&window);
